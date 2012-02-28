@@ -1,4 +1,5 @@
 # git ignore file
 src/*/bin
 src/*/obj
-*.ncrunchsolution.user
+*.user
+*.suo
