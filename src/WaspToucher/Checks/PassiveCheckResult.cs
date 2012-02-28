@@ -21,7 +21,7 @@ namespace WaspToucher.Checks
         /// <param name="check">The check.</param>
         /// <param name="url">The URL.</param>
         /// <returns>The result</returns>
-        private static PassiveCheckResult CreateResult(bool passed, IPassiveCheck check, Uri url)
+        private static PassiveCheckResult CreateResult(bool passed, IPassiveCheck check, string url)
         {
             PassiveCheckResult result = new PassiveCheckResult();
             result.Passed = passed;
@@ -32,22 +32,12 @@ namespace WaspToucher.Checks
 
         public static PassiveCheckResult CreateFailure(IPassiveCheck check, string url)
         {
-            return CreateFailure(check, new Uri(url));
-        }
-
-        public static PassiveCheckResult CreateFailure(IPassiveCheck check, Uri url)
-        {
             PassiveCheckResult result = CreateResult(false, check, url);
 
             return result;
         }
 
         public static PassiveCheckResult CreatePass(IPassiveCheck check, string url)
-        {
-            return CreatePass(check, new Uri(url));
-        }
-
-        public static PassiveCheckResult CreatePass(IPassiveCheck check, Uri url)
         {
             PassiveCheckResult result = CreateResult(true, check, url);
 
@@ -57,7 +47,7 @@ namespace WaspToucher.Checks
         /// <summary>
         /// Gets the URL.
         /// </summary>
-        public Uri Url
+        public string Url
         {
             get;
             private set;
