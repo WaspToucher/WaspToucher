@@ -5,6 +5,9 @@ using System.Text;
 
 namespace WaspToucher.Engine.Passive
 {
+    /// <summary>
+    /// The container for the engine to be used to run the checks against
+    /// </summary>
     public interface IEngine
     {
         /// <summary>
