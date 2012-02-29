@@ -1,0 +1,17 @@
+Wasp Toucher aims to provide a passive vulnerability security scanner for web applications.
+
+Using OWASP's vulnerability lists (https://www.owasp.org) WaspToucher conducts passive analysis against intercepted HTTP transmissions checking 
+ 
+Some reasons why to use WaspToucher:
+- Safe for production environments as WaspToucher will not perform any attacks in passive mode
+- Can be used to test cloud environments
+- Able to intercept SSL/TLS packets and analyse them
+- WaspToucher Runner is based around command line execution and is perfect in continuous build and automated QA environments
+
+How WaspToucher works:
+1. WaspToucher Runner starts a passive proxy 
+2. HTTP requests will then automatically run through the proxy
+3. WaspToucher will analyses the HTTP flow of traffic and check for any possible exploits or security concerns
+
+If you are interested in contributing, create a fork and once your done send a pull request.
+https://github.com/WaspToucher/WaspToucher
