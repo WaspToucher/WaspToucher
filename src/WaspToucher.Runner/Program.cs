@@ -13,13 +13,16 @@ namespace WaspToucher.Runner
         {
             BootStrapper.Initialise();
 
+            ILogger logger = ServiceLocator.Current.GetInstance<ILogger>();
             IEngine engine = ServiceLocator.Current.GetInstance<IEngine>();
+
             try
             {
                 engine.Start();
 
-                Console.WriteLine("Press enter to quit");
+                logger.Info("Press enter to quit");
                 Console.ReadLine();
+                logger.Info("Quiting...");
             }
             finally
             {

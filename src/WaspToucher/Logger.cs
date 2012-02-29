@@ -12,7 +12,7 @@
 
         public static ILogger GetLoggingService()
         {
-            ILogger logger = (ILogger)LogManager.GetLogger("NLogLogger", typeof(Logger));
+            ILogger logger = (ILogger)LogManager.GetLogger(loggerName, typeof(Logger));
             return logger;
         }
 
