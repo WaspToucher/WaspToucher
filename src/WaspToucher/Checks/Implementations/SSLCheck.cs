@@ -19,7 +19,7 @@ namespace WaspToucher.Checks.Implementations
 
         public ComplianceStandard[] Compliances
         {
-            get { throw new NotImplementedException(); }
+            get { return new ComplianceStandard[] { ComplianceStandard.None }; }
         }
 
         public Uri InformationUrl

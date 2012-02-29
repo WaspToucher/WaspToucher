@@ -1,23 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fiddler;
-
-namespace WaspToucher.Checks.Implementations.Owasp.Transport
+﻿namespace WaspToucher.Checks.Implementations.Owasp.Transport
 {
-    public class TransportLayerSecurityUsesSecureCookie : IPassiveCheck
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    public class TransportLayerSecurityCookieUsesDomain : IPassiveCheck
     {
         public string Description
         {
             get { throw new NotImplementedException(); }
         }
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
         public string Name
         {
             get
             {
-                return "Cookie should be marked as secure whilst using TLS";
+                return "Cookie should be marked with domain whilst using TLS";
             }
         }
 
@@ -51,25 +53,19 @@ namespace WaspToucher.Checks.Implementations.Owasp.Transport
 
                     if (parts != null && parts.Length > 0)
                     {
-                        bool isSecured = false;
                         bool isDomainSet = false;
 
                         parts.ForEach(v =>
-                            {
-                                if (v.Trim().ToLower() == "secure")
-                                {
-                                    isSecured = true;
-                                }
-
-                                if (v.Trim().ToLower().StartsWith("domain"))
-                                {
-                                    isDomainSet = true;
-                                }
-                            });
-
-                        if (!isSecured)
                         {
-                            return PassiveCheckResult.CreateFailure(this, fiddlerSession.fullUrl, "Cookie not marked as secure");
+                            if (v.Trim().ToLower().StartsWith("domain"))
+                            {
+                                isDomainSet = true;
+                            }
+                        });
+
+                        if (!isDomainSet)
+                        {
+                            return PassiveCheckResult.CreateFailure(this, fiddlerSession.fullUrl, "Cookie not marked with domain");
                         }
                     }
                 }

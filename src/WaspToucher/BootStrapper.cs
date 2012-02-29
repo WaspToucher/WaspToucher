@@ -15,6 +15,7 @@ namespace WaspToucher
             ContainerBuilder builder = new ContainerBuilder();
 
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces();
+            builder.Register<ILogger>(c => Logger.GetLoggingService());
 
             IContainer serviceContainer = builder.Build(Autofac.Builder.ContainerBuildOptions.Default);
             IServiceLocator provider = new AutofacContrib.CommonServiceLocator.AutofacServiceLocator(serviceContainer);

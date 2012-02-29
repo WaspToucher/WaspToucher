@@ -26,7 +26,7 @@
         {
             get
             {
-                return ComplianceStandard.None;
+                return ComplianceStandard.Owasp;
             }
         }
     }
