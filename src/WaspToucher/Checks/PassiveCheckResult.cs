@@ -17,20 +17,43 @@ namespace WaspToucher.Checks
         /// <summary>
         /// Creates the result.
         /// </summary>
+        /// <param name="passed">if set to <c>true</c> [passed].</param>
+        /// <param name="check">The check.</param>
+        /// <param name="url">The URL.</param>
+        /// <returns>
+        /// The result
+        /// </returns>
+        private static PassiveCheckResult CreateResult(bool passed, IPassiveCheck check, string url)
+        {
+            return CreateResult(passed, check, url, null);
+        }
+
+        /// <summary>
+        /// Creates the result.
+        /// </summary>
         /// <param name="passed">if set to <c>true</c> then the check passed.</param>
         /// <param name="check">The check.</param>
         /// <param name="url">The URL.</param>
-        /// <returns>The result</returns>
-        private static PassiveCheckResult CreateResult(bool passed, IPassiveCheck check, string url)
+        /// <param name="message">The message.</param>
+        /// <returns>
+        /// The result
+        /// </returns>
+        private static PassiveCheckResult CreateResult(bool passed, IPassiveCheck check, string url, string message)
         {
             PassiveCheckResult result = new PassiveCheckResult();
             result.Passed = passed;
             result.Url = url;
+            result.Message = message;
 
             return result;
         }
 
         public static PassiveCheckResult CreateFailure(IPassiveCheck check, string url)
+        {
+            return CreateFailure(check, url, null);
+        }
+
+        public static PassiveCheckResult CreateFailure(IPassiveCheck check, string url, string message)
         {
             PassiveCheckResult result = CreateResult(false, check, url);
 
@@ -60,6 +83,15 @@ namespace WaspToucher.Checks
         ///   <c>true</c> if passed; otherwise, <c>false</c>.
         /// </value>
         public bool Passed
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the message.
+        /// </summary>
+        public string Message
         {
             get;
             private set;
