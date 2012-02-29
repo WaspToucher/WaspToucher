@@ -43,11 +43,22 @@ namespace WaspToucher.Checks.Implementations.Owasp.Transport
         {
             if (fiddlerSession.isHTTPS)
             {
-                //if (fiddlerSession.)
-                //{
-                //    return PassiveCheckResult.CreateFailure(this, fiddlerSession.url);
-                //}
-                throw new NotImplementedException();
+                if (fiddlerSession.oResponse.headers.Exists("cache-control"))
+                {
+                    string cc = fiddlerSession.oResponse.headers["cache-control"].Trim().ToLower();
+                    if (!cc.Contains("no-store"))
+                    {
+                        return PassiveCheckResult.CreateFailure(this, fiddlerSession.url, "Cache-Control header does not contain 'no-store'");
+                    }
+                    else if (!cc.Contains("no-cache"))
+                    {
+                        return PassiveCheckResult.CreateFailure(this, fiddlerSession.url, "Cache-Control header does not contain 'no-cache'");
+                    }
+                }
+                else
+                {
+                    return PassiveCheckResult.CreateFailure(this, fiddlerSession.url, "No Cache-Control header found");
+                }
             }
 
             return PassiveCheckResult.CreatePass(this, fiddlerSession.url);
